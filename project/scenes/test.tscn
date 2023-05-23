@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn88sic6ihybl"]
+
+[ext_resource type="Texture2D" uid="uid://b6i0du1b1j0fb" path="res://project/assets/level_assets/floor.png" id="1_tkh1j"]
+[ext_resource type="PackedScene" uid="uid://b2hvqb4eogrrv" path="res://project/assets/characters/character/character_body_2d.tscn" id="2_cvln4"]
+[ext_resource type="Script" path="res://project/scenes/Button.gd" id="3_ufgx3"]
+[ext_resource type="PackedScene" uid="uid://cbc7se18ixuei" path="res://enemy.tscn" id="4_alj41"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c082t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fti4o"]
+size = Vector2(2258, 260)
+
+[node name="Test" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_cvln4")]
+position = Vector2(206, -498)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -242)
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_c082t")
+
+[node name="TextureRect" type="TextureRect" parent="StaticBody2D"]
+offset_right = 2236.0
+offset_bottom = 240.0
+texture = ExtResource("1_tkh1j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1119, 120)
+shape = SubResource("RectangleShape2D_fti4o")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(2835, -258)
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_c082t")
+
+[node name="TextureRect" type="TextureRect" parent="StaticBody2D2"]
+offset_right = 2236.0
+offset_bottom = 240.0
+texture = ExtResource("1_tkh1j")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(1119, 120)
+shape = SubResource("RectangleShape2D_fti4o")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1030.0
+offset_top = -629.0
+offset_right = 1125.0
+offset_bottom = -530.0
+script = ExtResource("3_ufgx3")
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("4_alj41")]
+position = Vector2(3954, -530)
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
